@@ -1,0 +1,132 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://paint/paint.gd" type="Script" id=1]
+[ext_resource path="res://paint/cursor.png" type="Texture" id=2]
+[ext_resource path="res://paint/Cursor.gd" type="Script" id=3]
+[ext_resource path="res://paint/JoyStick.gd" type="Script" id=4]
+[ext_resource path="res://paint/vida.png" type="Texture" id=5]
+
+[node name="Paint" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Sprite" type="Sprite" parent="."]
+script = ExtResource( 1 )
+
+[node name="Save" type="Button" parent="Sprite"]
+margin_left = -493.05
+margin_top = -285.0
+margin_right = -430.05
+margin_bottom = -261.0
+text = "Save"
+
+[node name="New Layer" type="Button" parent="Sprite"]
+margin_left = -419.386
+margin_top = -285.0
+margin_right = -356.386
+margin_bottom = -261.0
+text = "New Layer"
+
+[node name="Delete Layer" type="Button" parent="Sprite"]
+margin_left = -327.305
+margin_top = -285.0
+margin_right = -249.305
+margin_bottom = -261.0
+text = "Delete Layer"
+
+[node name="Tools" type="Label" parent="Sprite"]
+visible = false
+margin_left = -502.109
+margin_top = -228.521
+margin_right = -462.109
+margin_bottom = -112.521
+rect_scale = Vector2( 1, 0.9 )
+text = "R:
+
+B:
+
+G:
+
+A:
+
+BRUSH SIZE:"
+
+[node name="Brush Size2" type="Label" parent="Sprite"]
+margin_left = -497.278
+margin_top = -36.8671
+margin_right = -430.278
+margin_bottom = -22.8671
+text = "Brush Size"
+
+[node name="Current Layer2" type="Label" parent="Sprite"]
+margin_left = -206.627
+margin_top = -263.214
+margin_right = -139.627
+margin_bottom = -249.214
+text = "Current Layer"
+
+[node name="Brush Size" type="TextEdit" parent="Sprite"]
+margin_left = -497.0
+margin_top = -60.0
+margin_right = -402.0
+margin_bottom = -40.0
+text = "5.0"
+wrap_enabled = true
+
+[node name="Current Layer" type="TextEdit" parent="Sprite"]
+margin_left = -206.35
+margin_top = -286.347
+margin_right = -111.35
+margin_bottom = -266.347
+text = "1"
+wrap_enabled = true
+
+[node name="Cursor" type="Sprite" parent="Sprite"]
+modulate = Color( 1, 1, 1, 0.498039 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="JoyStick" type="Control" parent="Sprite"]
+script = ExtResource( 4 )
+
+[node name="White Canvas" type="Sprite" parent="Sprite"]
+scale = Vector2( 12.5, 7.5 )
+z_index = -10
+texture = ExtResource( 5 )
+
+[node name="Del to Clean Canvas" type="Label" parent="Sprite"]
+margin_left = 366.0
+margin_top = 263.0
+margin_right = 492.0
+margin_bottom = 277.0
+text = "Del to Clean Canvas"
+
+[node name="Container" type="Container" parent="Sprite"]
+editor/display_folded = true
+margin_left = -500.917
+margin_top = -238.181
+margin_right = -460.917
+margin_bottom = -198.181
+
+[node name="ColorPicker" type="ColorPicker" parent="Sprite/Container"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 4.0
+margin_bottom = 4.0
+rect_scale = Vector2( 0.35, 0.35 )
+
+[node name="Layers" type="Node2D" parent="Sprite"]
+
+[node name="Sprite" type="Sprite" parent="Sprite/Layers"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[connection signal="button_down" from="Sprite/Save" to="Sprite" method="_on_Button_button_down"]
+[connection signal="button_down" from="Sprite/New Layer" to="Sprite" method="_on_New_Layer_button_down"]
+[connection signal="button_down" from="Sprite/Delete Layer" to="Sprite" method="_on_Delete_Layer_button_down"]
+[connection signal="text_changed" from="Sprite/Brush Size" to="Sprite" method="_on_Brush_Size_text_changed"]
+[connection signal="text_changed" from="Sprite/Brush Size" to="Sprite/Cursor" method="_on_Brush_Size_text_changed"]
+[connection signal="text_changed" from="Sprite/Current Layer" to="Sprite" method="_on_Current_Layer_text_changed"]
+[connection signal="color_changed" from="Sprite/Container/ColorPicker" to="Sprite" method="_on_ColorPicker_color_changed"]
